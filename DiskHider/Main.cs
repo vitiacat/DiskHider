@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace DiskHider
 {
@@ -48,7 +49,7 @@ namespace DiskHider
         public Main()
         {
             RegistryKey key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer");
-            object value = key.GetValue("NoDrives");
+            object value = key == null ? null : key.GetValue("NoDrives");
             DriveIds hiddenDrives = value == null ? DriveIds.Empty : (DriveIds)value;
             InitializeComponent();
             foreach(DriveInfo drive in DriveInfo.GetDrives())
@@ -58,7 +59,40 @@ namespace DiskHider
                 drivesList.Items.Add(letter, has);
             }
         }
+        private void applyButton_Click(object sender, EventArgs e)
+        {
+            RegistryKey key = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer");
+            DriveIds drives = DriveIds.Empty;
+            foreach(string letter in drivesList.CheckedItems)
+            {
+                drives |= (DriveIds)Enum.Parse(drives.GetType(), letter);
+            }
+            key.SetValue("NoDrives", (int)drives);
+            if(MessageBox.Show("Чтобы изменения вступили в силу нужно перезапустить проводник. Перезапустить проводник?", "Перезапуск проводника", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes){
+                foreach(Process p in Process.GetProcessesByName("explorer"))
+                {
+                    p.Kill();
+                }
+                Process.Start("explorer.exe");
+            }
+        }
+
+        private void hideAllDrives_Click(object sender, EventArgs e)
+        {
+            for(int i = 0 ; i < drivesList.Items.Count ; i++)
+                drivesList.SetItemChecked(i, true);
+            applyButton_Click(sender, e);
+        }
+
+        private void showAllDrives_Click(object sender, EventArgs e)
+        {
+            for(int i = 0 ; i < drivesList.Items.Count ; i++)
+                drivesList.SetItemChecked(i, false);
+            applyButton_Click(sender, e);
+        }
     }
+
+
     public class CommandLink : Button
     {
         const int BS_COMMANDLINK = 0x0000000E;

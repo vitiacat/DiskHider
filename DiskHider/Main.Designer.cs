@@ -30,10 +30,9 @@ namespace DiskHider
         private void InitializeComponent()
         {
             this.drivesList = new System.Windows.Forms.CheckedListBox();
-            this.commandLink3 = new DiskHider.CommandLink();
-            this.commandLink2 = new DiskHider.CommandLink();
-            this.commandLink1 = new DiskHider.CommandLink();
-            this.hideSelectedDrivesButton = new DiskHider.CommandLink();
+            this.showAllDrives = new DiskHider.CommandLink();
+            this.hideAllDrives = new DiskHider.CommandLink();
+            this.applyButton = new DiskHider.CommandLink();
             this.SuspendLayout();
             // 
             // drivesList
@@ -46,55 +45,47 @@ namespace DiskHider
             this.drivesList.Size = new System.Drawing.Size(245, 199);
             this.drivesList.TabIndex = 0;
             // 
-            // commandLink3
+            // showAllDrives
             // 
-            this.commandLink3.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.commandLink3.Location = new System.Drawing.Point(250, 142);
-            this.commandLink3.Name = "commandLink3";
-            this.commandLink3.Size = new System.Drawing.Size(240, 48);
-            this.commandLink3.TabIndex = 5;
-            this.commandLink3.Text = "Показать все диски";
-            this.commandLink3.UseVisualStyleBackColor = true;
+            this.showAllDrives.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.showAllDrives.Location = new System.Drawing.Point(250, 142);
+            this.showAllDrives.Name = "showAllDrives";
+            this.showAllDrives.Size = new System.Drawing.Size(240, 48);
+            this.showAllDrives.TabIndex = 5;
+            this.showAllDrives.Text = "Показать все диски";
+            this.showAllDrives.UseVisualStyleBackColor = true;
+            this.showAllDrives.Click += new System.EventHandler(this.showAllDrives_Click);
             // 
-            // commandLink2
+            // hideAllDrives
             // 
-            this.commandLink2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.commandLink2.Location = new System.Drawing.Point(250, 98);
-            this.commandLink2.Name = "commandLink2";
-            this.commandLink2.Size = new System.Drawing.Size(240, 38);
-            this.commandLink2.TabIndex = 4;
-            this.commandLink2.Text = "Скрыть все диски";
-            this.commandLink2.UseVisualStyleBackColor = true;
+            this.hideAllDrives.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.hideAllDrives.Location = new System.Drawing.Point(250, 73);
+            this.hideAllDrives.Name = "hideAllDrives";
+            this.hideAllDrives.Size = new System.Drawing.Size(240, 50);
+            this.hideAllDrives.TabIndex = 4;
+            this.hideAllDrives.Text = "Скрыть все диски";
+            this.hideAllDrives.UseVisualStyleBackColor = true;
+            this.hideAllDrives.Click += new System.EventHandler(this.hideAllDrives_Click);
             // 
-            // commandLink1
+            // applyButton
             // 
-            this.commandLink1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.commandLink1.Location = new System.Drawing.Point(250, 48);
-            this.commandLink1.Name = "commandLink1";
-            this.commandLink1.Size = new System.Drawing.Size(240, 44);
-            this.commandLink1.TabIndex = 3;
-            this.commandLink1.Text = "Показать выбранные диски";
-            this.commandLink1.UseVisualStyleBackColor = true;
-            // 
-            // hideSelectedDrivesButton
-            // 
-            this.hideSelectedDrivesButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.hideSelectedDrivesButton.Location = new System.Drawing.Point(250, 3);
-            this.hideSelectedDrivesButton.Name = "hideSelectedDrivesButton";
-            this.hideSelectedDrivesButton.Size = new System.Drawing.Size(240, 41);
-            this.hideSelectedDrivesButton.TabIndex = 2;
-            this.hideSelectedDrivesButton.Text = "Скрыть выбранные диски";
-            this.hideSelectedDrivesButton.UseVisualStyleBackColor = true;
+            this.applyButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.applyButton.Location = new System.Drawing.Point(250, 12);
+            this.applyButton.Name = "applyButton";
+            this.applyButton.Size = new System.Drawing.Size(240, 40);
+            this.applyButton.TabIndex = 2;
+            this.applyButton.Text = "Применить";
+            this.applyButton.UseVisualStyleBackColor = true;
+            this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(495, 202);
-            this.Controls.Add(this.commandLink3);
-            this.Controls.Add(this.commandLink2);
-            this.Controls.Add(this.commandLink1);
-            this.Controls.Add(this.hideSelectedDrivesButton);
+            this.Controls.Add(this.showAllDrives);
+            this.Controls.Add(this.hideAllDrives);
+            this.Controls.Add(this.applyButton);
             this.Controls.Add(this.drivesList);
             this.Name = "Main";
             this.Text = "DiskHider";
@@ -105,10 +96,9 @@ namespace DiskHider
         #endregion
 
         private System.Windows.Forms.CheckedListBox drivesList;
-        private DiskHider.CommandLink hideSelectedDrivesButton;
-        private DiskHider.CommandLink commandLink1;
-        private DiskHider.CommandLink commandLink2;
-        private DiskHider.CommandLink commandLink3;
+        private DiskHider.CommandLink applyButton;
+        private DiskHider.CommandLink hideAllDrives;
+        private DiskHider.CommandLink showAllDrives;
     }
 }
 
